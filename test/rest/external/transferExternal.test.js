@@ -8,7 +8,7 @@ use(chaiExclude)
 
 require('dotenv').config();
 
-// Testes para o endpoint de transferências
+// Testes para external do enpoint de transferências
 describe('Transfer', () => {
     describe('POST /transfers', () => {
         before(async () => {

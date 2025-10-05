@@ -9,7 +9,7 @@ const app = require('../../../app');
 // Mock
 const transferService = require('../../../service/transferService');
 
-// Testes
+// Testes para o controller do endpoint de transferências
 describe('Transfer Controller', () => {
     describe('POST /transfers', () => {
 

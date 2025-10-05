@@ -4,7 +4,7 @@ const request = require('supertest');
 const { expect } = require('chai');
 require('dotenv').config();
 
-// Testes para o endpoint de usuários
+// Testes para external do endpoint de usuários
 describe('User', () => {
     
     // Testes de registro de usuário
