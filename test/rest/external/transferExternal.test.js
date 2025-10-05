@@ -1,3 +1,4 @@
+
 // Bibliotecas
 const request = require('supertest');
 const { expect, use } = require('chai');
@@ -7,7 +8,7 @@ use(chaiExclude)
 
 require('dotenv').config();
 
-// Testes
+// Testes para o endpoint de transferências
 describe('Transfer', () => {
     describe('POST /transfers', () => {
         before(async () => {
