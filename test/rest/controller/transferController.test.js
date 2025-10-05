@@ -24,7 +24,7 @@ describe('Transfer Controller', () => {
             token = respostaLogin.body.token;
         });
 
-        it('Quando informo remetente e destinatario inexistentes recebo 400', async () => {
+        it('Quando informo remetente e destinatario inexistentes recebo (400 BAD REQUEST)', async () => {
             const resposta = await request(app)
                 .post('/transfers')
                 .set('Authorization', `Bearer ${token}`)
@@ -38,7 +38,8 @@ describe('Transfer Controller', () => {
             expect(resposta.body).to.have.property('error', 'Usuário remetente ou destinatário não encontrado')
         });
 
-        it('Usando Mocks: Quando informo remetente e destinatario inexistentes recebo 400', async () => {
+        it('Usando Mocks: Quando informo remetente e destinatario inexistentes recebo (400 BAD REQUEST)', async () => {
+            
             // Mocar apenas a função transfer do Service
             const transferServiceMock = sinon.stub(transferService, 'transfer');
             transferServiceMock.throws(new Error('Usuário remetente ou destinatário não encontrado'));
@@ -56,7 +57,8 @@ describe('Transfer Controller', () => {
             expect(resposta.body).to.have.property('error', 'Usuário remetente ou destinatário não encontrado');
         });
 
-        it('Usando Mocks: Quando informo valores válidos eu tenho sucesso com 201 CREATED', async () => {
+        it('Usando Mocks: Quando informo valores válidos eu tenho sucesso  (201 CREATED)', async () => {
+            
             // Mocar apenas a função transfer do Service
             const transferServiceMock = sinon.stub(transferService, 'transfer');
             transferServiceMock.returns({ 
@@ -90,12 +92,36 @@ describe('Transfer Controller', () => {
         });
 
         afterEach(() => {
+            
             // Reseto o Mock
             sinon.restore();
         })
     });
 
     describe('GET /transfers', () => {
-        // Its ficam aqui
+        it('Quando consulto a lista de transferências autenticado, recebo um array', async () => {
+            
+            // Realiza login para obter token
+            const respostaLogin = await request(app)
+                .post('/users/login')
+                .send({ username: 'julio', password: '123456' });
+
+            const token = respostaLogin.body.token;
+
+            const resposta = await request(app)
+                .get('/transfers')
+                .set('Authorization', `Bearer ${token}`);
+
+            expect(resposta.status).to.equal(200);
+            expect(resposta.body).to.be.an('array');
+        });
+
+        it('Quando consulto a lista de transferências sem token, recebo erro (401 UNAUTHORIZED)', async () => {
+            const resposta = await request(app)
+                .get('/transfers');
+
+            expect(resposta.status).to.equal(401);
+            expect(resposta.body).to.have.property('message', 'Token não fornecido.');
+        });
     });
 });
