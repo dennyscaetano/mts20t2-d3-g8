@@ -1,81 +1,121 @@
 # API de Transferências e Usuários
 
-Esta API permite o registro, login, consulta de usuários e transferências de valores entre usuários. O objetivo é servir de base para estudos de testes e automação de APIs.
+> Projeto desenvolvido como Desafio #3 de mentoria em Testes de Software, orientado por [Júlio de Lima](https://github.com/juliodelimas/pgats-02-api).
 
-## Tecnologias
+## Sumário
+- [Sobre o Projeto](#sobre-o-projeto)
+- [Tecnologias Utilizadas](#tecnologias-utilizadas)
+- [Como Executar](#como-executar)
+- [Como Rodar os Testes](#como-rodar-os-testes)
+- [Estrutura do Projeto](#estrutura-do-projeto)
+- [Regras de Negócio](#regras-de-negócio)
+- [Resultados dos Testes](#resultados-dos-testes)
+- [Créditos e Licença](#créditos-e-licença)
+
+## Sobre o Projeto
+
+Este repositório é um fork do projeto original do Júlio de Lima, com o objetivo de praticar automação de testes de API REST e testes de performance. O desafio consiste em criar testes automatizados para todos os endpoints REST usando SuperTest/Mocha e scripts de performance com k6.
+
+## Tecnologias Utilizadas
+
 - Node.js
 - Express
 - Swagger (documentação)
-- Banco de dados em memória (variáveis)
+- SuperTest & Mocha (testes automatizados)
+- k6 (testes de performance)
+- Chai (assertions)
+- Banco de dados em memória
 
-## Instalação
+## Como Executar
 
-1. Clone o repositório:
+1. **Clone o repositório:**
    ```sh
    git clone <repo-url>
-   cd pgats-02-api
+   cd <nome-da-pasta>
    ```
-2. Instale as dependências:
+2. **Instale as dependências:**
    ```sh
-   npm install express swagger-ui-express bcryptjs
+   npm install
    ```
+3. **Configure o arquivo `.env`:**
+   ```
+   BASE_URL_REST=http://localhost:3000
+   BASE_URL_GRAPHQL=http://localhost:3000/graphql
+   ```
+4. **Inicie o servidor:**
+   ```sh
+   node server.js
+   ```
+   - Acesse a API em: [http://localhost:3000](http://localhost:3000)
+   - Documentação Swagger: [http://localhost:3000/api-docs](http://localhost:3000/api-docs)
 
-## Configuração
+## Como Rodar os Testes
 
-Antes de seguir, crie um arquivo .env na pasta raiz contendo as propriedades BASE_URL_REST E BASE_URL_GRAPHQL, com a URL desses serviços.
-
-## Como rodar
-
-- Para iniciar o servidor:
+- **Testes automatizados (SuperTest/Mocha):**
   ```sh
-  node server.js
+  npx mocha test/rest/external/userExternal.test.js
+  npx mocha test/rest/external/transferExternal.test.js
+  npx mocha test/rest/controller/transferController.test.js
   ```
-- A API estará disponível em `http://localhost:3000`
-- A documentação Swagger estará em `http://localhost:3000/api-docs`
+- **Testes de performance (k6):**
+  ```sh
+  k6 run <caminho-do-script-k6.js>
+  ```
 
-## Endpoints principais
+## Estrutura do Projeto
 
-### Registro de usuário
-- `POST /users/register`
-  - Body: `{ "username": "string", "password": "string", "favorecidos": ["string"] }`
+```
+.
+├── app.js
+├── server.js
+├── controller/
+├── model/
+├── service/
+├── middleware/
+├── graphql/
+├── test/
+│   ├── rest/
+│   │   ├── controller/
+│   │   ├── external/
+│   │   └── fixture/
+│   └── graphql/
+└── ...
+```
 
-### Login
-- `POST /users/login`
-  - Body: `{ "username": "string", "password": "string" }`
+- **controller/**: Lógica dos endpoints REST
+- **service/**: Regras de negócio
+- **test/**: Testes automatizados (REST e GraphQL)
+- **test/rest/external/**: Testes simulando chamadas externas (como um cliente real)
+- **test/rest/controller/**: Testes focados nos controllers
 
-### Listar usuários
-- `GET /users`
+## Regras de Negócio
 
-### Transferências
-- `POST /transfers`
-  - Body: `{ "from": "string", "to": "string", "value": number }`
-- `GET /transfers`
-
-### GraphQL Types, Queries e Mutations
-
-Rode `npm run start-graphql` para executar a API do GraphQL e acesse a URL http://localhost:4000/graphql para acessá-la.
-
-- **Types:**
-  - `User`: username, favorecidos, saldo
-  - `Transfer`: from, to, value, date
-- **Queries:**
-  - `users`: lista todos os usuários
-  - `transfers`: lista todas as transferências (requer autenticação JWT)
-- **Mutations:**
-  - `registerUser(username, password, favorecidos)`: retorna User
-  - `loginUser(username, password)`: retorna token + User
-  - `createTransfer(from, to, value)`: retorna Transfer (requer autenticação JWT)
-
-## Regras de negócio
 - Não é permitido registrar usuários duplicados.
 - Login exige usuário e senha.
 - Transferências acima de R$ 5.000,00 só podem ser feitas para favorecidos.
 - O saldo inicial de cada usuário é de R$ 10.000,00.
 
-## Testes
-- O arquivo `app.js` pode ser importado em ferramentas de teste como Supertest.
-- Para testar a API GraphQL, importe `graphql/app.js` nos testes.
+## Resultados dos Testes
+
+### Testes de Usuários (userExternal)
+- **Registro, login e listagem de usuários**
+  
+   ![Registro, login e listagem de usuários](./docs/print-test-user-external.png)
+
+### Testes de Transferências (transferController)
+- **POST e GET /transfers (Controller)**
+  
+   ![Transfer Controller - POST e GET](./docs/print-test-transfer-controller.png)
+
+### Testes de Transferências (transferExternal)
+- **POST e GET /transfers (External)**
+  
+   ![Transfer External - POST e GET](./docs/print-test-transfer-external.png)
+
+## Créditos e Licença
+
+- Projeto original: [Júlio de Lima](https://github.com/juliodelimas/pgats-02-api)
+- Este fork foi desenvolvido para fins educacionais, como parte do Desafio #3 da Mentoria.
+- Licença: [MIT](LICENSE) (ou a mesma do projeto original)
 
 ---
-
-Para dúvidas, consulte a documentação Swagger, GraphQL Playground ou o código-fonte.
