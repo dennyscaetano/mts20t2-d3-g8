@@ -100,22 +100,22 @@ Este repositório é um fork do projeto original do Júlio de Lima, com o objeti
 ### Testes de Usuários (userExternal)
 - **Registro, login e listagem de usuários**
   
-   ![Registro, login e listagem de usuários](./docs/print-test-user-external.png)
+   ![Registro, login e listagem de usuários](./docs/print-test-user-external.jpg)
 
 ### Testes de Transferências (transferController)
 - **POST e GET /transfers (Controller)**
   
-   ![Transfer Controller - POST e GET](./docs/print-test-transfer-controller.png)
+   ![Transfer Controller - POST e GET](./docs/print-test-transfer-controller.jpg)
 
 ### Testes de Transferências (transferExternal)
 - **POST e GET /transfers (External)**
   
-   ![Transfer External - POST e GET](./docs/print-test-transfer-external.png)
+   ![Transfer External - POST e GET](./docs/print-test-transfer-external.jpg)
 
 ## Créditos e Licença
 
 - Projeto original: [Júlio de Lima](https://github.com/juliodelimas/pgats-02-api)
 - Este fork foi desenvolvido para fins educacionais, como parte do Desafio #3 da Mentoria.
-- Licença: [MIT](LICENSE) (ou a mesma do projeto original)
+- Licença: A mesma do projeto original
 
 ---
