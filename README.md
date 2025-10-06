@@ -6,7 +6,7 @@
 ![Mocha](https://img.shields.io/badge/Mocha-Testing-red?logo=mocha)
 ![SuperTest](https://img.shields.io/badge/SuperTest-API%20Testing-orange)
 ![k6](https://img.shields.io/badge/k6-Performance-blueviolet?logo=k6)
-![License MIT](https://img.shields.io/badge/License-MIT-lightgrey)
+![License Mesma do projeto original](https://img.shields.io/badge/License-MIT-lightgrey)
 
 ---
 
@@ -105,11 +105,11 @@ k6 run test/performance/transfer-flow.js
 ├── app.js
 ├── server.js
 ├── docs/                    
-│   ├── functional_tests.pdf          # Relatório de testes automatizados
-│   ├── k6_report.pdf                 # Relatório de testes de performance
-│   ├── print-test-user-external.jpg  # Print: testes de usuários
-│   ├── print-test-transfer-controller.jpg  # Print: controller
-│   └── print-test-transfer-external.jpg    # Print: external
+│   ├── functional_tests.pdf          
+│   ├── k6_report.pdf                 
+│   ├── print-test-user-external.jpg  
+│   ├── print-test-transfer-controller.jpg  
+│   └── print-test-transfer-external.jpg    
 ├── controller/              
 ├── model/                   
 ├── service/                 
@@ -189,7 +189,7 @@ k6 run test/performance/transfer-flow.js
 
 - Projeto original: [Júlio de Lima](https://github.com/juliodelimas/pgats-02-api)  
 - Este fork foi desenvolvido pelo **Grupo 8** para fins educacionais, como parte do **Desafio #3 da Mentoria 2.0 em Testes de Software**.  
-- Licença: **a mesma do projeto orignal.**  
+- Licença: **mesma do projeto original de Júlio de Lima.**
 
 ---
 
