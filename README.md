@@ -6,7 +6,6 @@
 ![Mocha](https://img.shields.io/badge/Mocha-Testing-red?logo=mocha)
 ![SuperTest](https://img.shields.io/badge/SuperTest-API%20Testing-orange)
 ![k6](https://img.shields.io/badge/k6-Performance-blueviolet?logo=k6)
-![License Mesma do projeto original](https://img.shields.io/badge/License-MIT-lightgrey)
 
 ---
 
@@ -187,9 +186,14 @@ k6 run test/performance/transfer-flow.js
 
 ## 🪪 Créditos e Licença
 
-- Projeto original: [Júlio de Lima](https://github.com/juliodelimas/pgats-02-api)  
-- Este fork foi desenvolvido pelo **Grupo 8** para fins educacionais, como parte do **Desafio #3 da Mentoria 2.0 em Testes de Software**.  
-- Licença: **mesma do projeto original de Júlio de Lima.**
+<p align="center">
+  <b>👥 Grupo 8:</b><br>
+  <a href="https://github.com/caiobberiba">Caio Bêribá</a> · 
+  <a href="https://github.com/dennyscaetano">Dennys Matos</a> · 
+  <a href="https://github.com/simonegabionetta">Simone Gabionetta</a><br>
+  <i>Desafio #3 – Mentoria 2.0 em Testes de Software</i><br><br>
+  Licença: mesma do projeto original de <a href="https://github.com/juliodelimas/pgats-02-api">Júlio de Lima</a>.
+</p>
 
 ---
 
