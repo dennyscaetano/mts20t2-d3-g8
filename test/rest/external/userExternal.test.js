@@ -80,4 +80,31 @@ describe('User', () => {
             expect(resposta.body).to.be.an('array');
         });
     });
+
+    
+    
+   // Teste de Dados - endpoint de user - POST
+    const testesDeDados = require('../fixture/requisicoes/users/postUserData.json');
+
+    testesDeDados.forEach(teste => {
+    it(`Quando envio dados inválidos ou válidos: ${teste.nomeDoTeste}`, async () => {
+        const resposta = await request(process.env.BASE_URL_REST)
+            .post('/users/register')
+            .send(teste.postUser);
+
+        expect(resposta.status).to.equal(teste.statusCode);
+
+        if (teste.statusCode === 201) {
+            expect(resposta.body).to.have.property('username', teste.postUser.username);
+            expect(resposta.body).to.have.property('favorecidos').that.is.an('array');
+        } else {
+            expect(resposta.body).to.have.property('error', teste.mensagemEsperada);
+        }
+    });
+});
+
+
+
+
+
 });
