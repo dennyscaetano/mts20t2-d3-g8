@@ -30,8 +30,8 @@ Este repositório é um fork do projeto original do Júlio de Lima, com o objeti
 
 1. **Clone o repositório:**
    ```sh
-   git clone <repo-url>
-   cd <nome-da-pasta>
+   git clone https://github.com/caiobberiba/transfer-users-api-testing.git
+   cd transfer-users-api-testing
    ```
 2. **Instale as dependências:**
    ```sh
@@ -59,7 +59,8 @@ Este repositório é um fork do projeto original do Júlio de Lima, com o objeti
   ```
 - **Testes de performance (k6):**
   ```sh
-  k6 run <caminho-do-script-k6.js>
+  k6 run test/performance/user-flow.js
+k6 run test/performance/transfer-flow.js
   ```
 
 ## Estrutura do Projeto
@@ -68,23 +69,23 @@ Este repositório é um fork do projeto original do Júlio de Lima, com o objeti
 .
 ├── app.js
 ├── server.js
-├── controller/
-├── model/
-├── service/
-├── middleware/
-├── graphql/
+├── docs/                    # Documentação e evidências dos testes
+├── controller/             # Lógica dos endpoints REST
+├── model/                 # Modelos e estruturas de dados
+├── service/              # Regras de negócio
+├── middleware/          # Middlewares da aplicação
 ├── test/
 │   ├── rest/
-│   │   ├── controller/
-│   │   ├── external/
-│   │   └── fixture/
-│   └── graphql/
+│   │   ├── controller/  # Testes dos controllers
+│   │   ├── external/    # Testes de integração
+│   │   └── fixture/    # Dados para os testes
+│   └── performance/    # Scripts de testes de performance (k6)
 └── ...
 ```
 
 - **controller/**: Lógica dos endpoints REST
 - **service/**: Regras de negócio
-- **test/**: Testes automatizados (REST e GraphQL)
+- **test/**: Testes automatizados (REST)
 - **test/rest/external/**: Testes simulando chamadas externas (como um cliente real)
 - **test/rest/controller/**: Testes focados nos controllers
 
@@ -116,6 +117,6 @@ Este repositório é um fork do projeto original do Júlio de Lima, com o objeti
 
 - Projeto original: [Júlio de Lima](https://github.com/juliodelimas/pgats-02-api)
 - Este fork foi desenvolvido para fins educacionais, como parte do Desafio #3 da Mentoria.
-- Licença: A mesma do projeto original
+- Licença: a mesma do projeto original
 
 ---
