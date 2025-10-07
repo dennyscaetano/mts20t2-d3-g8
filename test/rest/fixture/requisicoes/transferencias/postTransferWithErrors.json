@@ -29,7 +29,4 @@
         "statusCode": 400,
         "mensagemEsperada": "Usuário remetente ou destinatário não encontrado"
     }
-
-       
-    
 ]
