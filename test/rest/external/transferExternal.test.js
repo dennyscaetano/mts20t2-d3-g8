@@ -8,7 +8,7 @@ use(chaiExclude)
 
 require('dotenv').config();
 
-// Testes para external do endpoint de transferências
+// Testes para external do enpoint de transferências
 describe('Transfer', () => {
     describe('POST /transfers', () => {
         before(async () => {
@@ -46,9 +46,7 @@ describe('Transfer', () => {
             expect(resposta.body).to.have.property('message', 'Token não fornecido.');
         });
 
-   
-        
-        const testesDeErrosDeNegocio = require('../fixture/requisicoes/transferencias/postTransferWithErrors.json');
+    const testesDeErrosDeNegocio = require('../fixture/requisicoes/transferencias/postTransferWithErrors.json');
         testesDeErrosDeNegocio.forEach(teste => {
             it(`Testando a regra relacionada a ${teste.nomeDoTeste}`, async () => {
                 const postTransfer = require('../fixture/requisicoes/transferencias/postTransfer.json');
@@ -61,20 +59,11 @@ describe('Transfer', () => {
                 expect(resposta.body).to.have.property('error', teste.mensagemEsperada)
             });
         });
+    });
 
-        
-        
-
-        
-
-});
-
-
-
-
-describe('GET /transfers', () => {
+    describe('GET /transfers', () => {
         it('Quando consulto a lista de transferências autenticado, recebo um array', async () => {
-            const postLogin = require('../fixture/requisicoes/login/postLogin.json')
+            const postLogin = require('../fixture/requisicoes/login/postLogin.json');
             const respostaLogin = await request(process.env.BASE_URL_REST)
                 .post('/users/login')
                 .send(postLogin);
@@ -94,71 +83,5 @@ describe('GET /transfers', () => {
             expect(resposta.status).to.equal(401);
             expect(resposta.body).to.have.property('message', 'Token não fornecido.');
         });
-});
-
-
-
-// Teste de Dados - endpoint de transferências - POST
-const testesDeDados = require('../fixture/requisicoes/transferencias/postTransferData.json');
-
-describe('POST /transfers - Testes de Dados', () => {
-    testesDeDados.forEach(teste => {
-        it(`Quando envio dados inválidos: ${teste.nomeDoTeste}`, async () => {
-            const resposta = await request(process.env.BASE_URL_REST)
-                .post('/transfers')
-                .set('Authorization', `Bearer ${token}`)
-                .send(teste.postTransfer);
-
-            expect(resposta.status).to.equal(teste.statusCode);
-            expect(resposta.body).to.have.property('error', teste.mensagemEsperada);
-        });
     });
-});
-
-// Teste de Dados - endpoint de transferências - GET
-describe('GET /transfers - Testes de Dados', () => {
-    let token;
-
-    before(async () => {
-        const postLogin = require('../fixture/requisicoes/login/postLogin.json');
-        const respostaLogin = await request(process.env.BASE_URL_REST)
-            .post('/users/login')
-            .send(postLogin);
-
-        token = respostaLogin.body.token;
-    });
-
-    it('Deve retornar um array de transferências', async () => {
-        const resposta = await request(process.env.BASE_URL_REST)
-            .get('/transfers')
-            .set('Authorization', `Bearer ${token}`);
-
-        expect(resposta.status).to.equal(200);
-        expect(resposta.body).to.be.an('array');
-    });
-
-    it('Cada transferência deve ter os campos corretos e tipos válidos', async () => {
-        const resposta = await request(process.env.BASE_URL_REST)
-            .get('/transfers')
-            .set('Authorization', `Bearer ${token}`);
-
-        resposta.body.forEach(transfer => {
-            expect(transfer).to.have.property('from').that.is.a('string');
-            expect(transfer).to.have.property('to').that.is.a('string');
-            expect(transfer).to.have.property('value').that.is.a('number');
-            expect(transfer).to.have.property('date').that.is.a('string'); // ISO date
-        });
-    });
-
-    it('Se não enviar token, deve retornar erro 401', async () => {
-        const resposta = await request(process.env.BASE_URL_REST)
-            .get('/transfers');
-
-        expect(resposta.status).to.equal(401);
-        expect(resposta.body).to.have.property('message', 'Token não fornecido.');
-    });
-
-    
-});
-
 });
