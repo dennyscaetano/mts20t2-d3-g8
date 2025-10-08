@@ -10,7 +10,7 @@ const app = require('../../../app');
 const transferService = require('../../../service/transferService');
 
 // Testes para o controller do endpoint de transferências
-describe('Transfer Controller', () => {
+describe('Rest Controller - Transfer ', () => {
     describe('POST /transfers', () => {
 
         beforeEach(async () => {

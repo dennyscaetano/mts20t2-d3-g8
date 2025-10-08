@@ -5,7 +5,7 @@ const { expect } = require('chai');
 require('dotenv').config();
 
 // Testes para external do endpoint de usuários
-describe('User', () => {
+describe('Rest External - User', () => {
     
     // Testes de registro de usuário
     describe('POST /users/register', () => {
