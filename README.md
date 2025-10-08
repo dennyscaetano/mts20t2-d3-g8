@@ -63,7 +63,7 @@ npm install
 3. **Configure o arquivo `.env`:**
 ```env
 BASE_URL_REST=http://localhost:3000
-BASE_URL_GRAPHQL=http://localhost:3000/graphql
+BASE_URL_GRAPHQL=http://localhost:4000/graphql
 ```
 
 4. **Inicie o servidor:**

@@ -9,7 +9,7 @@ use(chaiExclude)
 require('dotenv').config();
 
 // Testes para external do enpoint de transferências
-describe('Transfer', () => {
+describe('Rest External - Transfer', () => {
     describe('POST /transfers', () => {
         before(async () => {
             const postLogin = require('../fixture/requisicoes/login/postLogin.json');

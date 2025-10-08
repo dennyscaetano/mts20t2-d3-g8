@@ -6,7 +6,9 @@ use(chaiExclude);
 
 require('dotenv').config();
 
-describe('Testes de Transferência', () => {
+describe('GraphQL External - Transfer', () => {
+    let token;
+    let createTransfer;
     
     before(async () => {
         const loginUser = require('../fixture/requisicoes/login/loginUser.json');
