@@ -1,4 +1,4 @@
-name: Node.js CI
+name: Workflow de Disparo Manual
 
 on:
   workflow_dispatch:
