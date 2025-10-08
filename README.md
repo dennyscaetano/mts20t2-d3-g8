@@ -167,10 +167,7 @@ chmod +x performance/run-performance-tests.sh
 │   └── authenticate.js
 ├── docs/                    
 │   ├── functional_tests.pdf          
-│   ├── k6_report.pdf                 
-│   ├── print-test-user-external.jpg  
-│   ├── print-test-transfer-controller.jpg  
-│   └── print-test-transfer-external.jpg    
+│   └── k6_report.pdf    
 ├── controller/              
 ├── model/                   
 ├── service/                 
@@ -268,24 +265,23 @@ export const options = {
 
 ## 📊 Resultados dos Testes
 
-### 👤 Testes de Usuários (`userExternal`)
-**Registro, login e listagem de usuários**
+### 🧪 Testes Funcionais
+**22 testes executados com 100% de sucesso**
 
-![Registro, login e listagem de usuários](./docs/print-test-user-external.jpg)
+- **REST External**: 8 testes (usuários e transferências)
+- **REST Controller**: 5 testes (transferências com mocks)
+- **GraphQL External**: 4 testes (transferências)
+- **GraphQL Controller**: 5 testes (usuários e transferências)
 
----
+### ⚡ Testes de Performance
+**6 cenários de carga testados com k6**
 
-### 💸 Testes de Transferências (`transferController`)
-**POST e GET /transfers (Controller)**
-
-![Transfer Controller - POST e GET](./docs/print-test-transfer-controller.jpg)
-
----
-
-### 🌐 Testes de Transferências (`transferExternal`)
-**POST e GET /transfers (External)**
-
-![Transfer External - POST e GET](./docs/print-test-transfer-external.jpg)
+- **POST /users/register**: 5-10 usuários simultâneos
+- **POST /users/login**: 10-20 usuários simultâneos
+- **GET /users**: 15-30 usuários simultâneos
+- **POST /transfers**: 5-10 usuários simultâneos
+- **GET /transfers**: 10-20 usuários simultâneos
+- **Teste combinado**: Todos os endpoints em sequência
 
 ---
 
@@ -306,8 +302,8 @@ export const options = {
 |----------|------------|-------------|
 | ✅ **Cobertura de endpoints REST** | 100% (6 de 6 endpoints) | SuperTest + Mocha |
 | ✅ **Cobertura de endpoints GraphQL** | 100% (queries e mutations) | SuperTest + Mocha |
-| 🧪 **Casos de teste executados** | 18+ casos / 18+ aprovados | Mocha |
-| ⏱️ **Tempo total de execução (funcionais)** | ~2.4s | Mocha |
+| 🧪 **Casos de teste executados** | 22 casos / 22 aprovados | Mocha |
+| ⏱️ **Tempo total de execução (funcionais)** | ~0.58s | Mocha |
 | 📊 **Relatórios gerados** | Mochawesome HTML/JSON | Mochawesome |
 
 ### ⚡ Testes de Performance
@@ -318,7 +314,7 @@ export const options = {
 | 📉 **Erro máximo sob carga (20 VUs)** | 0.00% | k6 |
 | 📊 **Throughput máximo atingido** | 142 req/s | k6 |
 | 🎯 **Thresholds atendidos** | 95% das requisições < 2s | k6 |
-| 🔄 **Cenários de carga testados** | 5 endpoints individuais + 1 combinado | k6 |
+| 🔄 **Cenários de carga testados** | 6 cenários (5 individuais + 1 combinado) | k6 |
 
 ### 🚀 APIs Disponíveis
 
@@ -336,8 +332,10 @@ export const options = {
 
 <p align="center">
   <b>👥 Grupo 8:</b><br>
+  <a href="https://github.com/brunockutzke">Bruno Kutzke</a> · 
   <a href="https://github.com/caiobberiba">Caio Bêribá</a> · 
   <a href="https://github.com/dennyscaetano">Dennys Matos</a> · 
+  <a href="https://github.com/jorgemobil">Jorge Antonio</a> · 
   <a href="https://github.com/simonegabionetta">Simone Gabionetta</a><br>
   <i>Desafio #3 – Mentoria 2.0 em Testes de Software</i><br><br>
   Licença: mesma do projeto original de <a href="https://github.com/juliodelimas/pgats-02-api">Júlio de Lima</a>.
