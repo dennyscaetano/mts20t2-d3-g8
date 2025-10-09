@@ -38,11 +38,10 @@ describe('Rest External - User Login VADER', () => {
 
             // Valida Content-Type
             expect(resposta.headers['content-type']).to.include('application/json');
-            console.log('Content-Type recebido:', resposta.headers['content-type']);
+            
 
             // Valida tamanho do payload
-            const tamanhoPayload = JSON.stringify(resposta.body).length;
-            console.log('Tamanho do payload recebido:', tamanhoPayload);
+            const tamanhoPayload = JSON.stringify(resposta.body).length;            
             expect(tamanhoPayload).to.be.below(2000);
 
             // Valida presença do token
