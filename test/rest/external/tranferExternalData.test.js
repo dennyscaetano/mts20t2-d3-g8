@@ -21,7 +21,7 @@ describe('Rest External - Transfers VADER', () => {
 
         // Valida que o token existe
         expect(token).to.be.a('string');
-        console.log('Token obtido:', token);
+        
     });
 
     describe('POST /transfers - Validação VADER', () => {
