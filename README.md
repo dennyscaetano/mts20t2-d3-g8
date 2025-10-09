@@ -268,7 +268,7 @@ export const options = {
 ### 🧪 Testes Funcionais
 **22 testes executados com 100% de sucesso**
 
-- **REST External**: 8 testes (usuários e transferências)
+- **REST External**: 12 testes (usuários e transferências)
 - **REST Controller**: 5 testes (transferências com mocks)
 - **GraphQL External**: 4 testes (transferências)
 - **GraphQL Controller**: 5 testes (usuários e transferências)
@@ -302,7 +302,7 @@ export const options = {
 |----------|------------|-------------|
 | ✅ **Cobertura de endpoints REST** | 100% (6 de 6 endpoints) | SuperTest + Mocha |
 | ✅ **Cobertura de endpoints GraphQL** | 100% (queries e mutations) | SuperTest + Mocha |
-| 🧪 **Casos de teste executados** | 22 casos / 22 aprovados | Mocha |
+| 🧪 **Casos de teste executados** | 26 casos / 26 aprovados | Mocha |
 | ⏱️ **Tempo total de execução (funcionais)** | ~0.58s | Mocha |
 | 📊 **Relatórios gerados** | Mochawesome HTML/JSON | Mochawesome |
 
