@@ -15,6 +15,7 @@
 - [Tecnologias Utilizadas](#-tecnologias-utilizadas)
 - [Como Executar](#-como-executar)
 - [Como Rodar os Testes](#-como-rodar-os-testes)
+- [Heurística VADER](#-heurística-vader)
 - [Estrutura do Projeto](#-estrutura-do-projeto)
 - [Regras de Negócio](#-regras-de-negócio)
 - [Testes de Performance](#-testes-de-performance)
@@ -32,6 +33,7 @@ Este repositório é um **fork** do projeto original de [Júlio de Lima](https:/
 O desafio consistiu em:
 - Criar testes automatizados com **SuperTest e Mocha**;
 - Implementar testes de performance com **k6**;
+- Aplicar a **heurística VADER** para testes de API;
 - Registrar evidências visuais e relatórios dos testes executados.
 
 ---
@@ -95,6 +97,13 @@ node graphql/server.js
 
 ### 🧭 Testes Funcionais (SuperTest/Mocha)
 
+**Total de testes implementados: 26 testes funcionais**
+
+- **REST External**: 13 testes (6 usuários + 7 transferências)
+- **REST Controller**: 5 testes (transferências com mocks)
+- **GraphQL External**: 4 testes (transferências)
+- **Testes VADER**: 4 testes focados em validação de dados (incluídos nos totais acima)
+
 **Executar todos os testes funcionais:**
 ```sh
 npm test
@@ -153,6 +162,37 @@ chmod +x performance/run-performance-tests.sh
 
 ---
 
+## 🎯 Heurística VADER
+
+Este projeto implementa a **heurística VADER** para testes de API, conforme descrito por [Maximiliano Alves](https://maximilianoalves.medium.com/vader-heuristica-para-teste-de-api-na-pratica-fcf78c6acec).
+
+### 📋 Componentes da Heurística
+
+| Componente | Descrição | Implementação no Projeto |
+|------------|-----------|-------------------------|
+| **V**erbs | Teste dos métodos HTTP | ✅ GET, POST validados |
+| **A**uthorization | Validação de autenticação | ✅ Bearer Token testado |
+| **D**ata | Validação de dados | ✅ **Foco principal** |
+| **E**rrors | Códigos e mensagens de erro | ✅ 400, 401, 404 testados |
+| **R**esponsiveness | Tempo de resposta | ✅ Testes de performance com k6 |
+
+### 🔍 Implementação do Componente "D" (Data)
+
+O foco principal foi na validação de **dados** conforme a heurística:
+
+- **Tipagem**: Validação dos tipos do payload de envio e resposta
+- **Formato**: Validação do Content-Type (`application/json`)
+- **Tamanho**: Validação do tamanho do payload (< 2000 caracteres)
+- **Estrutura**: Validação da presença e tipos dos campos obrigatórios
+
+**Testes VADER implementados:**
+- `POST /users/login` - Validação de tipagem e tamanho
+- `GET /users` - Validação de estrutura da resposta
+- `POST /transfers` - Validação de dados da transferência
+- `GET /transfers` - Validação de array de transferências
+
+---
+
 ## 🗂️ Estrutura do Projeto
 
 ```text
@@ -185,10 +225,18 @@ chmod +x performance/run-performance-tests.sh
 │   │   ├── controller/      
 │   │   ├── external/        
 │   │   └── fixture/         
+│   │       ├── requisicoes/
+│   │       │   ├── login/
+│   │       │   └── transferencias/
+│   │       └── respostas/
 │   └── graphql/
-│       ├── controller/
 │       ├── external/
 │       └── fixture/
+│           ├── requisicoes/
+│           │   ├── login/
+│           │   └── transferencia/
+│           └── respostas/
+│               └── transferencia/
 └── ...
 ```
 
@@ -266,12 +314,22 @@ export const options = {
 ## 📊 Resultados dos Testes
 
 ### 🧪 Testes Funcionais
-**22 testes executados com 100% de sucesso**
+**26 testes executados com 100% de sucesso**
 
-- **REST External**: 12 testes (usuários e transferências)
+- **REST External**: 13 testes (6 usuários + 7 transferências)
 - **REST Controller**: 5 testes (transferências com mocks)
 - **GraphQL External**: 4 testes (transferências)
-- **GraphQL Controller**: 5 testes (usuários e transferências)
+- **Testes VADER**: 4 testes focados em validação de dados (incluídos nos totais acima)
+
+#### 📊 Distribuição dos Testes VADER
+
+| Endpoint | Tipo de Validação | Testes Implementados |
+|----------|-------------------|---------------------|
+| `POST /users/login` | Tipagem, Formato, Tamanho | 1 teste |
+| `GET /users` | Estrutura, Tipagem, Tamanho | 1 teste |
+| `POST /transfers` | Tipagem, Formato, Tamanho | 1 teste |
+| `GET /transfers` | Estrutura, Tipagem, Tamanho | 1 teste |
+| **Total VADER** | **Validação de Dados** | **4 testes** |
 
 ### ⚡ Testes de Performance
 **6 cenários de carga testados com k6**
@@ -303,7 +361,8 @@ export const options = {
 | ✅ **Cobertura de endpoints REST** | 100% (6 de 6 endpoints) | SuperTest + Mocha |
 | ✅ **Cobertura de endpoints GraphQL** | 100% (queries e mutations) | SuperTest + Mocha |
 | 🧪 **Casos de teste executados** | 26 casos / 26 aprovados | Mocha |
-| ⏱️ **Tempo total de execução (funcionais)** | ~0.58s | Mocha |
+| 🎯 **Testes VADER implementados** | 4 dos 26 testes focados em dados | SuperTest + Mocha |
+| ⏱️ **Tempo total de execução (funcionais)** | ~0.77s | Mocha |
 | 📊 **Relatórios gerados** | Mochawesome HTML/JSON | Mochawesome |
 
 ### ⚡ Testes de Performance
